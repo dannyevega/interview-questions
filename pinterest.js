@@ -52,9 +52,9 @@ function domainCounts(arr){
 
 function splitWord(element){
     let parts = element.split('.'), results = [];
-        for(let i = 0; i < parts.length; i++){
-            results.push(parts.slice(i, parts.length).join('.'));
-        }
+    for(let i = 0; i < parts.length; i++){
+        results.push(parts.slice(i, parts.length).join('.'));
+    }
     return results;
 }
 
