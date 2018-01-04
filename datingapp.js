@@ -1,4 +1,4 @@
-// Zoosk Interview
+// Zoosk
 
 /*
 - have you used Single Page Applications before? Explain how they work. She then told me to go to amazon.com and enter ‘Hello Kitty’ into the search bar and asked me if their site was using a SPA
