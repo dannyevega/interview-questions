@@ -2,25 +2,29 @@
 var expression = "6+9-12"; // 3
 var expression2 = "6+12+7/5*3"; // 15
 
-function evaluateExpression(exp){
-	var regex = /\d+/g;
-	var numbers = exp.match(regex);
-	var newNums = [];
-	var operands = exp.match(/[*/+-]/g);
-	for(var i = 0; i < numbers.length; i++){
-		newNums.push(parseInt(numbers[i]));
-	}
-	var current = newNums[0];
-	for(var i = 0; i < operands.length; i++){
-		if(operands[i] === "+"){
-			current += newNums[i + 1];
-		} else if(operands[i] === "-") {
-			current -= newNums[i + 1];
-		} else if(operands[i] === "*"){
-			current *= newNums[i + 1];
-		} else {
-			current /= newNums[i + 1];
-		}
-	}
-	return current;
+const evaluateExpression = (expression) => {
+  let numStrings = expression.split(/[^\w\s]/gi);
+  let operands = expression.match(/[*/+-]/g);
+  let numbers = numStrings.map(num => {
+    return parseInt(num);
+  });
+  let result = numbers[0];
+  for(let i = 0; i < operands.length; i++){
+    let current = operands[i];
+    switch(current){
+      case '+':
+        result += numbers[i + 1];
+        break;
+      case '-':
+        result -= numbers[i + 1];
+        break;
+      case '*':
+        result *= numbers[i + 1];
+        break;
+      case '/':
+        result /= numbers[i + 1];
+        break;
+    }
+  }
+  return result;  
 }

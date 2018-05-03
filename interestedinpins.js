@@ -58,3 +58,22 @@ function splitWord(element){
     return results;
 }
 
+const countSubdomains = (list) => {
+  let map = {};
+  list.forEach(domain => {
+    let splitDomain = domain.split(",");
+    let count = parseInt(splitDomain[0]);  
+    let domainStr = splitDomain[1];
+    let domains = domainStr.split(".");
+    for(let i = 0; i < domains.length; i++){
+      if(map[domainStr] === undefined){
+        map[domainStr] = count;
+      } else {
+        map[domainStr] += count;
+      }
+      domainStr = domainStr.substr(domainStr.indexOf(".") + 1, domainStr.length - 1);
+    }
+  });
+  return map;
+}
+

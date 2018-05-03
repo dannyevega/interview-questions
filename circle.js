@@ -57,3 +57,33 @@ function returnTopThree(arr){
     }
     return result;
 }
+
+const returnTopThree = (list) => {
+  let map = {};
+  let orderedWinners = [];
+  for(let i = 0; i < list.length; i++){
+    let current = list[i];
+    let leftRecipe = current.slice(0, 3).sort().join("");
+    let rightRecipe = current.slice(3, 6).sort().join("");
+    let winner = current.slice(-1).join("");
+    if(map[leftRecipe] === undefined){
+      map[leftRecipe] = 0;
+    }
+    if(map[rightRecipe] === undefined){
+      map[rightRecipe] = 0;
+    }
+    if(winner === "LeftWins"){
+      map[leftRecipe]++;
+    } else {
+      map[rightRecipe]++;
+    }  
+  }
+  for(let key in map){
+    orderedWinners.push([key, map[key]]);
+  }
+  orderedWinners.sort((a, b) => {
+    return b[1] - a[1];
+  });
+  let topWinners = orderedWinners.slice(0,3);
+  return topWinners; 
+}
