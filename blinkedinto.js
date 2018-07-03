@@ -17,18 +17,18 @@ Foo.prototype.biz = function(){
 var f = new Foo(7);
 
 // What will these calls return?
-f.bar(); // unknown --> d.bar is not a function BECAUSE it is a closure
+f.bar(); // Uncaught TypeError: f.bar is not a function
 f.baz(); // 7
-f.biz(); // undefined
+f.biz(); // Uncaught ReferenceError: a is not defined
 
 // Now, make all calls above return 7
 var Foo = function(a){
 	this.a = a;
 	this.bar = function(){
-		return a;
+		return this.a;
     }
 	this.baz = function(){
-		return a;
+		return this.a;
 	}
 }
 
@@ -36,4 +36,4 @@ Foo.prototype.biz = function(){
 	return this.a;
 }
 
-Built a small UI component // https://imgur.com/wmnmXsX
+// Built a small UI component // https://imgur.com/wmnmXsX
