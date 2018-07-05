@@ -20,3 +20,31 @@ const largestProduct = (arr) => {
 }
 
 console.log(largestProduct(testArr2));
+
+// -------------------------------------------------------------------------------------------------------------------------
+
+const getProduct = (arr) => {
+  // first, sort array so we have all negatives on one side and positives on the other -- this is linear
+  arr = arr.sort((a, b) => {
+    return a - b;
+  });
+
+  // do comparisons -- if negative, compare first two numbers in array since they might be large negative numbers and a negative multiplied by another negative is a positive
+  if(arr[0] < 0){
+    // get product of negatives
+    let negatives = arr[0] * arr[1];
+    // get product of positives
+    let positives = arr[arr.length - 2] * arr[arr.length - 1];
+    // compare negtive and positives
+    if(negatives > positives){
+      return negatives;
+    } else {
+      return positives;
+    }
+  } else {
+    // only positive numbers 0 or greater
+    return (arr[arr.length - 2] * arr[arr.length - 1]);
+  }
+}
+
+console.log(getProduct(testArr1));
