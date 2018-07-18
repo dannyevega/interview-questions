@@ -34,11 +34,22 @@ for(var i=0; i<a.length; i++){
 a[1].f();
 
 // now how can we get it to print what we expect? i.e. a[0].f() --> 0, a[1].f() --> 1, a[2].f() --> 2
+// below runs immediately
 var a = [{}, {}, {}];
 for(var i=0; i<a.length; i++){
 	a[i].f = (function(){
 		console.log(i);
 	})();
+}
+
+// will run when you invoke each element in the array
+var a = [{}, {}, {}];
+for(var i=0; i<a.length; i++){
+  a[i].f = (function(j){
+    return function(){
+      console.log(j);
+    }
+  }(i));
 }
 
 //

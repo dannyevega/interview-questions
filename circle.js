@@ -27,37 +27,6 @@ var arr = [
 // the last index in each subarray tells you who won so you can keep track
 // return the top 3 winners in the list
 
-function returnTopThree(arr){
-    var map = {}, orderedArr = [], result = [];
-    for(var i = 0; i < arr.length; i++){
-        var current = arr[i];
-        var leftRecipe = current.slice(0, 3).sort().join("");
-        var rightRecipe = current.slice(3, 6).sort().join("");
-        if(map[leftRecipe] === undefined){
-            map[leftRecipe] = 0;
-        }
-        if(map[rightRecipe] === undefined){
-            map[rightRecipe] = 0;
-        }
-        if(current[current.length - 1] === "LeftWins"){
-            map[leftRecipe] += 1;
-        }
-        if(current[current.length - 1] === "RightWins"){
-            map[rightRecipe] += 1;
-        }
-    }
-    for(var key in map){
-        orderedArr.push([key, map[key]])
-    }
-    orderedArr.sort(function(a, b){
-        return b[1] - a[1];
-    });
-    for(var j = 0; j < orderedArr.length && j < 3; j++){
-        result.push(orderedArr[j]);
-    }
-    return result;
-}
-
 const returnTopThree = (list) => {
   let map = {};
   let orderedWinners = [];
@@ -87,3 +56,60 @@ const returnTopThree = (list) => {
   let topWinners = orderedWinners.slice(0,3);
   return topWinners; 
 }
+
+
+
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+
+// Separating into different functions
+
+const topThreeWinners = (arr) => {
+  let map = {};
+  for(let i = 0; i < arr.length; i++){
+    let current = arr[i];
+    let leftRecipe = current.slice(0,3).sort().join("");
+    let rightRecipe = current.slice(3,6).sort().join("");
+    let winner = current.slice(-1).join("");
+    if(map[leftRecipe] === undefined){
+      map[leftRecipe] = 0;
+    }
+    if(map[rightRecipe] === undefined){
+      map[rightRecipe] = 0;
+    }
+    if(winner === 'LeftWins'){
+      map[leftRecipe]++;
+    } else {
+      map[rightRecipe]++;
+    }
+  }
+  let sorted = sortWinners(map);
+  let topThreeMap = getWinners(sorted.slice(0,3));
+  return topThreeMap;
+}
+
+const sortWinners = (obj) => {
+  let result = [];
+  for(let key in obj){
+    result.push([key, obj[key]]);
+  }
+  result.sort((a, b) => {
+    return b[1] - a[1];
+  });
+  return result;
+}
+
+const getWinners = (arr) => {
+  let map = {};
+  for(let i = 0; i < arr.length; i++){
+    let current = arr[i][0];
+    let count = arr[i][1];
+    if(map[current] === undefined){
+      map[current] = count;
+    }
+  }
+  return map;
+}
+
+console.log(topThreeWinners(arr));

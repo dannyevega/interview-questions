@@ -77,3 +77,63 @@ const countSubdomains = (list) => {
   return map;
 }
 
+
+
+
+
+
+
+
+const getDomainCount = (list) => {
+  let map = {};
+  list.forEach(domain => {
+    domain = domain.split(",");
+    let count = parseInt(domain[0]);
+    let splitDomains = domain[1].split(".");
+    let domains = getAllDomains(splitDomains);
+    for(let i = 0; i < domains.length; i++){
+      let current = domains[i];
+      if(map[current] === undefined){
+        map[current] = count;
+      } else {
+        map[current] += count;
+      }
+    }
+  });
+  let sorted = sortCounts(map);
+  let sortedMap = createSortedMap(sorted);
+  return sortedMap;
+}
+
+const getAllDomains = (domains) => {
+  let result = [];
+  for(let i = 0; i < domains.length; i++){
+    result.push(domains.slice(i, domains.length).join("."));
+  }
+  return result;
+}
+
+const sortCounts = (obj) => {
+  let result = [];
+  for(let key in obj){
+    result.push([key, obj[key]]);
+  }
+  result.sort((a, b) => {
+    return b[1] - a[1] || a[0].localeCompare(b[0]);
+  });
+  return result;
+}
+
+const createSortedMap = (list) => {
+  let map = {};
+  for(let i = 0; i < list.length; i++){
+    let current = list[i][0];
+    let count = list[i][1];
+    if(map[current] === undefined){
+      map[current] = count;
+    }
+  }
+  return map;
+}
+
+console.log(getDomainCount(counts));
