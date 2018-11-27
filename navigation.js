@@ -133,3 +133,21 @@ mocha.run(function() {});
   margin-top: 10px;
   margin-right: 10px;
 }
+
+
+
+
+
+
+
+const urls = [url0, url1, url2, url3];
+
+urls.forEach((url) => {
+  $http.get(url).then((data) => {
+    
+  });
+});
+
+
+
+function nextStep([data0, data1, data2, data3])

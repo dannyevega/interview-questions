@@ -46,3 +46,22 @@ NOTES:
 • You do not have to print the spaces between the digits or
   letters as shown in the sample output–that is there to make
   it easy for us to read it.
+
+
+https://www.apple.com/macbook-air/features/
+
+// 1
+doSomething().then(function () {
+  return doSomethingElse();
+});
+
+// 2
+doSomething().then(function () {
+  doSomethingElse();
+});
+
+// 3
+doSomething().then(doSomethingElse());
+
+// 4
+doSomething().then(doSomethingElse);

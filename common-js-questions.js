@@ -57,6 +57,34 @@ delete student1.school;
 
 
 
+// 4. Write a function that will spiral a matrix.
+// Input: matrix below
+// Output: [ 0, 1, 2, 3, 4, 9, 8, 7, 6, 5, 10, 11, 12, 13, 14, 19, 18, 17, 16, 15 ]
+var mtx = [
+ [0,  1, 2,  3, 4],
+ [5,  6, 7,  8, 9],
+ [10, 11, 12, 13, 14],
+ [15, 16, 17, 18, 19]
+];
+
+let result = [];
+for(let i = 0; i < mtx.length; i++){
+  let current = mtx[i];
+  let count = 4;
+  for(let j = 0; j < current.length; j++){    
+    if(i % 2 === 0){
+      result.push(current[j]);
+    } else {
+      result.push(current[count]);
+      count--;
+    }    
+  }
+}
+
+
+
+
+
 // 6. What will the following code output to the console and why?
 // (function(x) {
 //    return (function(y) {
